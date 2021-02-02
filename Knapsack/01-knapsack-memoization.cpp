@@ -24,7 +24,7 @@ int main()
     int n, c;
     //vector <int> val,wt; //uncomment to use vectors instead of array
     cin >> n >> c;
-    int val[n], wt[c];
+    int val[n], wt[n];
 
     for (int i = 0; i < n; i++)
     {
