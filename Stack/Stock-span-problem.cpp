@@ -5,21 +5,15 @@ class Solution{
     public:
     vector <int> calculateSpan(int price[], int n)
     {
-        vector<int> v, span(n,1);
+        vector<int> v;
         stack<int> s;
         for(int i=0; i<n; i++){
             while(s.size()>0 && price[s.top()]<=price[i])
                 s.pop();
-            if(s.size()==0)
-                v.push_back(-1);
-            else
-                v.push_back(s.top());
+            v.push_back((s.size()==0)?(i+1):(i-s.top()));
             s.push(i);
         }
-        for(int i=0;i<n;i++){
-            span[i]=i-v[i];
-        }
-        return span;
+        return v;
     }
 };
 
