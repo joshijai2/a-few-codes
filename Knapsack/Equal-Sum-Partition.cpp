@@ -3,7 +3,6 @@ using namespace std;
 
 int main()
 {
-    //variable initialization and input
     int n;
     //vector <int> val,wt; //uncomment to use vectors instead of array
     cin >> n;
