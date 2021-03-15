@@ -1,53 +1,58 @@
 // { Driver Code Starts
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
- // } Driver Code Ends
+// } Driver Code Ends
 
-class Solution{
-    
+class Solution
+{
+
     // Function to find the trapped water between the blocks.
-    public:
-    int trappingWater(int arr[], int n){
-        vector<int> lm(n,0),rm(n,0);
-        int water=0;
-        
+public:
+    int trappingWater(int arr[], int n)
+    {
+        vector<int> lm(n, 0), rm(n, 0);
+        int water = 0;
+
         lm[0] = arr[0];
-        for(int i=1; i<n; i++)
+        for (int i = 1; i < n; i++)
             lm[i] = max(lm[i - 1], arr[i]);
-        
-        rm[n-1] = arr[n-1];
-        for(int i=n-2; i>=0; i--)
+
+        rm[n - 1] = arr[n - 1];
+        for (int i = n - 2; i >= 0; i--)
             rm[i] = max(rm[i + 1], arr[i]);
-        
-        for(int i=0; i<n; i++)
+
+        for (int i = 0; i < n; i++)
             water += min(lm[i], rm[i]) - arr[i];
-        
+
         return water;
     }
 };
 
 // { Driver Code Starts.
 
-int main(){
+int main()
+{
     int t;
     //testcases
     cin >> t;
-    
-    while(t--){
+
+    while (t--)
+    {
         int n;
         //size of array
         cin >> n;
         int a[n];
-        
+
         //adding elements to the array
-        for(int i =0;i<n;i++){
-            cin >> a[i];            
+        for (int i = 0; i < n; i++)
+        {
+            cin >> a[i];
         }
         Solution obj;
         //calling trappingWater() function
         cout << obj.trappingWater(a, n) << endl;
     }
-    
+
     return 0;
-}  // } Driver Code Ends
+} // } Driver Code Ends
