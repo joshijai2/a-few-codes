@@ -15,10 +15,10 @@ public:
         int dp[W + 1];
         memset(dp, 0, sizeof dp);
 
-        for (int i = 0; i <= W; i++)
-            for (int j = 0; j < n; j++)
-                if (wt[j] <= i)
-                    dp[i] = max(dp[i], dp[i - wt[j]] + val[j]);
+        for (int j = 0; j <= W; j++)
+            for (int i = 0; i < n; i++)
+                if (j >= at[i])
+                    dp[j] = max(dp[j], dp[j - wt[i]] + val[i]);
 
         return dp[W];
     }
