@@ -1,2 +1,5 @@
 # cpp build files
 *.exe
+
+# vscode
+.vscode/
