@@ -10,7 +10,7 @@ public:
 		stack<int> s;
 		for (int i = 0; i < n; i++)
 		{
-			while (s.size() > 0 && price[s.top()] <= price[i])
+			while (!s.empty() && price[s.top()] <= price[i])
 				s.pop();
 			v.push_back((s.size() == 0) ? (i + 1) : (i - s.top()));
 			s.push(i);
