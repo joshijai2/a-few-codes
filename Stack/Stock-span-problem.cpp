@@ -8,6 +8,7 @@ public:
 	{
 		vector<int> v;
 		stack<int> s;
+		
 		for (int i = 0; i < n; i++)
 		{
 			while (!s.empty() && price[s.top()] <= price[i])
