@@ -11,33 +11,46 @@ class Solution
 public:
     long long getMaxArea(long long arr[], int n)
     {
-        vector<long long> nsl, nsr, area;
-        stack<long long> ls, rs;
-
-        for (int i = 0; i < n; i++)
-        {
-            while (ls.size() > 0 && arr[ls.top()] >= arr[i])
-                ls.pop();
-            nsl.push_back(ls.empty() ? -1 : ls.top());
-            ls.push(i);
-        }
-
+        vector<long long> NSR(n), NSL(n);
+        stack<long long> rs, ls;        
+        
         for (int i = n - 1; i >= 0; i--)
         {
-            while (rs.size() > 0 && arr[rs.top()] >= arr[i])
+            while (!rs.empty() && arr[rs.top()] >= arr[i])
                 rs.pop();
-            nsr.push_back(rs.empty() ? n : rs.top());
+                
+            if (!rs.empty())
+                NSR[i] = rs.top();
+                
+            else
+                NSR[i] = n;
+                
             rs.push(i);
         }
-        reverse(nsr.begin(), nsr.end());
-
+        
         for (int i = 0; i < n; i++)
         {
-            // cout<<arr[i]<<" "<<nsr[i]<<" "<<nsl[i]<<endl;
-            area.push_back(arr[i] * (nsr[i] - nsl[i] - 1));
+            while (!ls.empty() && arr[ls.top()] >= arr[i])
+                ls.pop();
+                
+            if (!ls.empty())
+                NSL[i] = ls.top();
+                
+            else
+                NSL[i] = -1;
+                
+            ls.push(i);
         }
-
-        return *max_element(area.begin(), area.end());
+        
+        long long maxArea = 0;
+        
+        for (int i = 0; i < n; i++)
+        {   
+            // cout<<arr[i]<<NSR[i]<<NSL[i]<<endl;
+            maxArea = max(maxArea,(arr[i] * (NSR[i] - NSL[i] - 1)));
+        }
+        
+        return maxArea;
     }
 };
 

@@ -7,8 +7,8 @@ using namespace std;
 class Solution
 {
     public:
-    //Function to find the next greater element for each element of the array.
-    vector<long long> nextLargerElement(vector<long long> arr, int n){
+    //Function to find the next smaller element for each element of the array.
+    vector<long long> nextSmallerElement(vector<long long> arr, int n){
         // Your code here
         vector<long long> NSR(n);
         stack<long long> st;
@@ -19,15 +19,15 @@ class Solution
                 st.pop();
                 
             if (!st.empty())
-                NGR[i] = st.top();
+                NSR[i] = st.top();
                 
             else
-                NGR[i] = -1;
+                NSR[i] = -1;
                 
             st.push(arr[i]);
         }
         
-        return NGR;
+        return NSR;
     }
 };
 
@@ -47,7 +47,7 @@ int main()
             cin>>arr[i];
         
         Solution obj;
-        vector <long long> res = obj.nextLargerElement(arr, n);
+        vector <long long> res = obj.nextSmallerElement(arr, n);
         for (long long i : res) cout << i << " ";
         cout<<endl;
     }
