@@ -22,7 +22,7 @@ public:
         for (int i = n - 2; i >= 0; i--)
             rm[i] = max(rm[i + 1], arr[i]);
 
-        for (int i = 0; i < n; i++)
+        for (int i = 1; i < n-1; i++)
             water += min(lm[i], rm[i]) - arr[i];
 
         return water;
