@@ -10,7 +10,7 @@ class Solution
     //Function to find the next greater element for each element of the array.
     vector<long long> nextLargerElement(vector<long long> arr, int n){
         // Your code here
-        vector<long long> NS(n);
+        vector<long long> NSL(n);
         stack<long long> st;
     
         for (int i = 0; i < n; i++)
