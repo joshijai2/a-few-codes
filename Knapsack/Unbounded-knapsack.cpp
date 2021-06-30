@@ -17,7 +17,7 @@ public:
 
         for (int j = 0; j <= W; j++)
             for (int i = 0; i < n; i++)
-                if (j >= at[i])
+                if (j >= wt[i])
                     dp[j] = max(dp[j], dp[j - wt[i]] + val[i]);
 
         return dp[W];
