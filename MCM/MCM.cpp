@@ -25,7 +25,7 @@ public:
                 //initialize cost at i, j
                 m[i][j] = m[i][i] + m[i+1][j] +
                     (arr[i-1] * arr[i] * arr[j]);
-                    
+                
                 // Find minimum cost for multiplications at i, j
                 for(int k=i+1; k<j; k++)
                     m[i][j] = min(m[i][j],

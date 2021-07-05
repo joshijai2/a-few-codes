@@ -22,23 +22,22 @@ public:
         
         for(int i=0; i<n; i++){
             // initialize no. of cuts with max value possible.
-            int minc = i;
+            c[i] = i;
             // loop from 0 to ith index to
             // find min no. of cuts for string of 'i+1' length.
             for(int j=0; j<=i; j++){
                 // if char at first(j) and last(i) index are equal.
-                if(s[j]==s[i])
+                if(s[j]==s[i]){
                     // if length of string is less than 2
                     // or if s[j+1:i-1] is a palindrome.
                     if (i-j < 2 || p[j+1][i-1]){
                         // s[j:i] is a palindrome.
                         p[j][i] = true;
                         // min no of cuts
-                        minc = min(minc, j==0 ? 0 : (c[j-1]+1));
+                        c[i] = min(c[i], j==0 ? 0 : (c[j-1]+1));
                     }
+                }
             }
-            // add the min value to c table.
-            c[i] = minc;
         }
         
         return c[n-1];
