@@ -123,4 +123,51 @@ ADD CONSTRAINT PK_Person PRIMARY KEY (ID);
 ALTER TABLE Persons
 DROP PRIMARY KEY;
 
+-------------------
+-- create a table
+CREATE TABLE census (
+  id INTEGER PRIMARY KEY,
+  age INTEGER NOT NULL,
+  gender TEXT NOT NULL
+);
+-- insert some values
+INSERT INTO census VALUES (1, 23, 'M');
+INSERT INTO census VALUES (2, 33, 'F');
+INSERT INTO census VALUES (3, 3, 'M');
+INSERT INTO census VALUES (4, 43, 'F');
+INSERT INTO census VALUES (5, 53, 'M');
+INSERT INTO census VALUES (6, 63, 'F');
+INSERT INTO census VALUES (7, 73, 'M');
+INSERT INTO census VALUES (8, 3, 'F');
+INSERT INTO census VALUES (9, 21, 'M');
+INSERT INTO census VALUES (10, 23, 'F');
+INSERT INTO census VALUES (11, 29, 'M');
+INSERT INTO census VALUES (12, 30, 'F');
+INSERT INTO census VALUES (13, 5, 'M');
+INSERT INTO census VALUES (14, 22, 'F');
+INSERT INTO census VALUES (15, 6, 'M');
+INSERT INTO census VALUES (16, 67, 'F');
+INSERT INTO census VALUES (17, 75, 'M');
+INSERT INTO census VALUES (18, 7, 'F');
+INSERT INTO census VALUES (19, 35, 'M');
+INSERT INTO census VALUES (20, 22, 'F');
 
+-- query to group age and display count and split gender into 2 columns
+SELECT
+    age_group,
+    COUNT(*) as total,
+    SUM(CASE gender WHEN 'M' THEN 1 ELSE 0 END) AS Male,
+    SUM(CASE gender WHEN 'F' THEN 1 ELSE 0 END) AS Female
+FROM (
+    SELECT
+    CASE 
+      WHEN census.age BETWEEN 1 AND 14 THEN 'children'
+      WHEN census.age BETWEEN 15 AND 24 THEN 'youth'
+      WHEN census.age BETWEEN 25 AND 60 THEN 'adults'
+      ELSE 'seniors'
+    END as age_group,
+    Gender
+    FROM census
+)
+GROUP BY age_group
+Order by total desc;

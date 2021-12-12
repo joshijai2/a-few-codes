@@ -1,0 +1,132 @@
+'''
+ * Let's take a 2D plane on which 4 type of movements are allowed
+ * L -> left by 1 position
+ * R -> right by 1 position
+ * U -> up by 1 position
+ * D -> down by 1 position.
+ *
+ * I will give you a starting postion (X, Y) and a string S which will be composed of allowed movement commands
+ * and you have to tell me the final position after all movements.
+ * Input:
+ * (X, Y) => (-5, 3) and S = "LRLRLURDLLDDRRDDLLUULLLUUUURRRRRL"
+ *
+ * Sample input output:=
+ * (-5, 3) S="LL" => -7, 3
+          |
+          |
+          |
+ -------(0,0)---------
+          |
+          |
+          |
+'''
+
+'''
+* Case 1: I will give you boundaries and you can not cross the boundary i.e. if you are at boundary then you will keep waiting till next
+ * valid command on which you can move in some direction.
+ * For example our boundaries can be:
+ * Right Boundary X = 10
+ * Left Boundary X = -7
+ * Down Boundary Y = -13
+ * Up Boundary Y = 18
+'''
+
+'''
+ * Case2: What if after hitting the boundary it bounces back i.e. it changes its direction
+ *  e.g. if it is L and it hits left boundary
+ * then it will bounce back and any further L will be treated as R
+ * and R will be treated as L and it will keep happening on each boundary hit.
+  ______________
+ |      |       |
+ | -7,3 | -6,3  |
+ |      |a       |
+ ----------------
+ X=-7 left boundary
+
+ x= -7 ==> L ==> x=-6 L ==> x=-5, R x ==> -6
+ *
+'''
+
+def final_pos(x,y, s):
+  for moves in s:
+    if moves == "L":
+      x = x - 1
+    elif moves == "R":
+      x = x + 1
+    elif moves == "U":
+      y = y - 1
+    else:
+      y = y + 1
+	return x,y
+
+def print_final_poistion(x, y, lb, rb, ub, db, s):
+  a,b = final_pos(x,y,s)
+    
+  rl_range = rb - lb
+  ud_range = db - ub
+  
+  rl = False
+  
+  if a>x and rb<a:
+    a = a - (rb-x)
+  else:
+    a = a + (x - lb)
+    rl = True
+    
+  while a > rl_range:
+    rl = not rl
+    a = a - rl_range
+  
+  ud = False
+  
+  if b>y and db<b:
+    b = b - (db-y)
+  else:
+    b = b - (y-ub)
+    ud = True
+  
+  while b > ud_range:
+    b = b - ud_range
+    ud = not ud
+  
+    x = lb + a if rl == True else rb - a
+    y = ub + b if ud == True else db - b
+	return x,y
+
+'''
+There is a straight street where a faulty municipal engineer has randomly installed some street lamps.
+Each lamp has a lighting capacity range in meters.
+For example if a lamp has lighting capacity 3 that means it can light up to 3 meters left as well as 3 meters right.
+An auditor came to audit the installation and now he is trying to figure out how many lamps are not needed in the current installation for the same lighting coverage.
+Can you help the auditor in his effort?
+
+
+Input:
+Position of lamps on X axis in meters:
+[-9, -6, -5, -2, 1, 3, 4, 12]
+Lighting range of each lamp in meters:
+[5,  3,  9,  1,  1, 4, 2, 3]
+Output:
+5
+'''
+
+pos = [-9, -6, -5, -2, 1, 3, 4, 12]
+
+lrange = [5,  3,  9,  1,  1, 4, 2, 3]
+
+
+
+st = []
+
+for p,r in zip(pos, lrange):
+  if len(st) == 0:
+    st.append([p,r])
+  
+  elif sum(st[-1]) < p+r:
+    
+    while len(st)>0 and p - r > st[-1][0]-st[-1][1]:
+      st.pop()
+	  
+    st.append([p,r])
+  
+print(len(st))

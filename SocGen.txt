@@ -1,0 +1,34 @@
+Select empname, mngrname from 
+emp left join mngr
+on emp.empid = mngr.empid;
+
+
+EMP
+firstname in capital letter
+alok
+
+select distinct firstname from emp;
+
+s = abcdfhdhdhs
+c = 0
+s[1]
+
+6%3 = 0
+1%3 = 1
+3%1 = 0
+
+for i in xrange(3,n,3):
+    if s[i]
+        c+=1
+
+def deletenode(root, val):
+    prev = None
+    temp = root
+    while(temp!=None):
+        if temp.data == val:
+            if prev!=None:
+                prev.next = temp.next
+            else:
+                root = root.next
+        temp = temp.next
+    return root
